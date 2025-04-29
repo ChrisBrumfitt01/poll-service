@@ -1,9 +1,7 @@
 package com.dizplai.pollservice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -11,7 +9,8 @@ import java.time.LocalDateTime;
 @Entity(name = "vote")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class VoteEntity {
 
     @Id
@@ -24,6 +23,13 @@ public class VoteEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "selected_option_id", referencedColumnName = "id", insertable = false, updatable = false)
     private OptionEntity selectedOption;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "poll_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private PollEntity poll;
+
+    @Column(name = "poll_id", nullable = false)
+    private Long pollId;
 
     @Column(name = "created_at")
     @CreationTimestamp

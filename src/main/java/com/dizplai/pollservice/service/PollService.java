@@ -6,9 +6,12 @@ import com.dizplai.pollservice.model.PollRequest;
 import com.dizplai.pollservice.model.PollResponse;
 import com.dizplai.pollservice.repository.PollRepository;
 import com.dizplai.pollservice.service.mapper.PollMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +20,7 @@ public class PollService {
 
     private final PollRepository pollRepository;
     private final PollMapper mapper;
-
+    @Transactional
     public PollResponse createPoll(PollRequest poll) {
         PollEntity pollEntity = new PollEntity();
         pollEntity.setQuestion(poll.getQuestion());
@@ -34,5 +37,8 @@ public class PollService {
         return mapper.toPollResponse(savedPoll);
     }
 
+    public Optional<PollEntity> getPollById(Long id){
+        return pollRepository.findById(id);
+    }
 
 }
