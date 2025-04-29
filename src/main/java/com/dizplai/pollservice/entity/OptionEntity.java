@@ -18,11 +18,10 @@ public class OptionEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "poll_id", referencedColumnName = "id")
+    @JoinColumn(name = "poll_id", referencedColumnName = "id", nullable = false)
     private PollEntity poll;
 
     @Column(name = "description")
     private String description;
-
 
 }

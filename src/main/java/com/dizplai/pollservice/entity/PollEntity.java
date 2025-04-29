@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "poll")
@@ -22,11 +23,16 @@ public class PollEntity {
     @Column(name = "question")
     private String question;
 
-    @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
-    private List<OptionEntity> options;
+    @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OptionEntity> options = new ArrayList<>();
 
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public void addOption(OptionEntity optionEntity) {
+        optionEntity.setPoll(this);
+        this.options.add(optionEntity);
+    }
 
 }
