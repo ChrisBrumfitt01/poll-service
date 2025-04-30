@@ -9,20 +9,18 @@ import java.util.List;
 
 @Component
 public class VoteMapper {
-
     public VotesResponse toVotesResponse(Long pollId, List<VoteEntity> voteEntities) {
-        List<VoteResponse> voteResponses = voteEntities.stream().map(e -> {
-            return VoteResponse.builder()
-                    .id(e.getId())
-                    .selectedOptionId(e.getSelectedOptionId())
-                    .selectedOption(e.getSelectedOption().getDescription())
-                    .createdAt(e.getCreatedAt())
-                    .build();
-        }).toList();
-
+        List<VoteResponse> voteResponses = voteEntities.stream().map(this::toVoteResponse).toList();
         return new VotesResponse(pollId, voteResponses);
     }
 
-
+    public VoteResponse toVoteResponse(VoteEntity voteEntity){
+        return VoteResponse.builder()
+                .id(voteEntity.getId())
+                .selectedOptionId(voteEntity.getSelectedOption().getId())
+                .selectedOption(voteEntity.getSelectedOption().getDescription())
+                .createdAt(voteEntity.getCreatedAt())
+                .build();
+    }
 
 }

@@ -17,19 +17,13 @@ public class VoteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "selected_option_id", nullable = false)
-    private Long selectedOptionId;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "selected_option_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "selected_option_id", referencedColumnName = "id")
     private OptionEntity selectedOption;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "poll_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "poll_id", referencedColumnName = "id")
     private PollEntity poll;
-
-    @Column(name = "poll_id", nullable = false)
-    private Long pollId;
 
     @Column(name = "created_at")
     @CreationTimestamp
