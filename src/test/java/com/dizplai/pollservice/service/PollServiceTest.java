@@ -78,4 +78,25 @@ public class PollServiceTest {
         verifyNoInteractions(pollRepository, pollMapper);
     }
 
+    @Test
+    public void getActivePolls_shouldReturnPollsMappedFromRepository() {
+        PollEntity poll1 = new PollEntity();
+        PollEntity poll2 = new PollEntity();
+        List<PollEntity> activePolls = List.of(poll1, poll2);
+
+        PollResponse response1 = new PollResponse();
+        PollResponse response2 = new PollResponse();
+        when(pollRepository.findActivePolls(any(LocalDateTime.class))).thenReturn(activePolls);
+        when(pollMapper.toPollResponse(poll1)).thenReturn(response1);
+        when(pollMapper.toPollResponse(poll2)).thenReturn(response2);
+
+        List<PollResponse> result = pollService.getActivePolls();
+
+        verify(pollRepository).findActivePolls(any(LocalDateTime.class));
+        verify(pollMapper).toPollResponse(poll1);
+        verify(pollMapper).toPollResponse(poll2);
+
+        assertThat(result).containsExactly(response1, response2);
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.dizplai.pollservice.service;
 
-import com.dizplai.pollservice.entity.OptionEntity;
 import com.dizplai.pollservice.entity.PollEntity;
 import com.dizplai.pollservice.exception.BadRequestException;
 import com.dizplai.pollservice.model.PollRequest;
@@ -12,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,13 @@ public class PollService {
         PollEntity savedPoll = pollRepository.save(pollEntity);
         log.info("Successfully saved new poll to database: {}", pollEntity);
         return mapper.toPollResponse(savedPoll);
+    }
+
+    public List<PollResponse> getActivePolls() {
+        return pollRepository.findActivePolls(LocalDateTime.now())
+                .stream()
+                .map(mapper::toPollResponse)
+                .collect(Collectors.toList());
     }
 
     public Optional<PollEntity> getPollById(Long id){
