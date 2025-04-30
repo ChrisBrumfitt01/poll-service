@@ -24,7 +24,7 @@ public class PollController {
     public ResponseEntity<PollResponse> createPoll(@RequestBody @Valid PollRequest pollRequest) {
         log.info("CreatePoll request received: {}", pollRequest);
         PollResponse createdPoll = pollService.createPoll(pollRequest);
-        log.info("CreatePoll request completed succesfully. Request: {}, Response: {}", pollRequest, createdPoll);
+        log.info("CreatePoll request completed successfully. Request: {}, Response: {}", pollRequest, createdPoll);
         return new ResponseEntity<>(createdPoll, HttpStatus.CREATED);
     }
 

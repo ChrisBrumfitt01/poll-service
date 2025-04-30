@@ -29,6 +29,12 @@ public class PollEntity {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(name = "active_from")
+    private LocalDateTime activeFrom;
+
+    @Column(name = "active_to")
+    private LocalDateTime activeTo;
+
     public void addOption(OptionEntity optionEntity) {
         optionEntity.setPoll(this);
         this.options.add(optionEntity);

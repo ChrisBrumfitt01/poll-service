@@ -18,5 +18,7 @@ public class PollResponse {
     private String question;
     private List<OptionResponse> options;
     private LocalDateTime createdAt;
+    private LocalDateTime activeFrom;
+    private LocalDateTime activeTo;
 
 }
