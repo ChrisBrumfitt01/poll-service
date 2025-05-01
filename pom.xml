@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dizplai</groupId>
-	<artifactId>pollRequest-service</artifactId>
+	<artifactId>poll-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pollRequest-service</name>
+	<name>poll-service</name>
 	<description>A service for managing user polls</description>
 	<url/>
 	<licenses>
