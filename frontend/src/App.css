@@ -1,0 +1,30 @@
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.app-container {
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+#logo {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  padding: 0 20px;
+}
+
+#logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+#logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
