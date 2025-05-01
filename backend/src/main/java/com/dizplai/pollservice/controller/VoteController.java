@@ -30,7 +30,9 @@ public class VoteController {
     @PostMapping("/poll/{pollId}/vote")
     public ResponseEntity<VoteResponse> createVote(@PathVariable("pollId") Long pollId,
                                                    @RequestBody @Valid VoteRequest voteRequest) {
+        log.info("CreateVote request received for pollID: {}, payload: {}", pollId, voteRequest);
         VoteResponse voteResponse = voteService.createVote(pollId, voteRequest);
+        log.info("CreateVote request received for pollID: {}, payload: {}", pollId, voteRequest);
         return new ResponseEntity<>(voteResponse, HttpStatus.CREATED);
     }
 
