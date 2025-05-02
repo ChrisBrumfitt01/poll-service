@@ -5,15 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class VotesResponse {
-
-    private Long pollId;
-    private List<VoteResponse> votes;
-    private List<VoteTotal> totals;
-
+public class VoteTotal {
+    private Long optionId;
+    private Long count;
+    private Double percentage;
 }
