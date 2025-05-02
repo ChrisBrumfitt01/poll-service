@@ -9,10 +9,6 @@ import java.util.List;
 
 @Component
 public class VoteMapper {
-    public VotesResponse toVotesResponse(Long pollId, List<VoteEntity> voteEntities) {
-        List<VoteResponse> voteResponses = voteEntities.stream().map(this::toVoteResponse).toList();
-        return new VotesResponse(pollId, voteResponses);
-    }
 
     public VoteResponse toVoteResponse(VoteEntity voteEntity){
         return VoteResponse.builder()

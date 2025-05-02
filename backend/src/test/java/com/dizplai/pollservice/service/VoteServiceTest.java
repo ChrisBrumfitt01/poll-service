@@ -7,8 +7,10 @@ import com.dizplai.pollservice.exception.BadRequestException;
 import com.dizplai.pollservice.exception.NotFoundException;
 import com.dizplai.pollservice.model.VoteRequest;
 import com.dizplai.pollservice.model.VoteResponse;
+import com.dizplai.pollservice.model.VoteTotal;
 import com.dizplai.pollservice.model.VotesResponse;
 import com.dizplai.pollservice.repository.VoteRepository;
+import com.dizplai.pollservice.service.aggregator.VoteAggregator;
 import com.dizplai.pollservice.service.mapper.VoteMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,30 +35,39 @@ public class VoteServiceTest {
     @Mock private OptionService optionService;
     @Mock private VoteRepository voteRepository;
     @Mock private VoteMapper voteMapper;
+    @Mock private VoteAggregator voteAggregator;
     @Captor private ArgumentCaptor<VoteEntity> voteCaptor;
 
     @InjectMocks
     private VoteService voteService;
 
     @Test
-    void getVotesByPollId_shouldReturnVotesResponse_whenPollExists() {
+    public void getVotesByPollId_shouldReturnVotesResponse_whenPollExists() {
         Long pollId = 1L;
 
         PollEntity existingPoll = new PollEntity();
         List<VoteEntity> existingVotes = List.of(new VoteEntity(), new VoteEntity());
-        VotesResponse mockResponse = new VotesResponse();
+        VoteResponse voteResponse1 = new VoteResponse(8L, 9L, "Option1", LocalDateTime.now());
+        VoteResponse voteResponse2 = new VoteResponse(10L, 11L, "Option2", LocalDateTime.now());
+        List<VoteResponse> voteResponses = List.of(voteResponse1, voteResponse2);
+        List<VoteTotal> voteTotals = List.of(new VoteTotal());
 
         when(pollService.getPollById(pollId)).thenReturn(Optional.of(existingPoll));
         when(voteRepository.findByPollId(pollId)).thenReturn(existingVotes);
-        when(voteMapper.toVotesResponse(pollId, existingVotes)).thenReturn(mockResponse);
+        when(voteMapper.toVoteResponse(existingVotes.get(0))).thenReturn(voteResponse1);
+        when(voteMapper.toVoteResponse(existingVotes.get(1))).thenReturn(voteResponse2);
+        when(voteAggregator.getVoteTotals(voteResponses)).thenReturn(voteTotals);
 
-        VotesResponse result = voteService.getVotesByPollId(pollId);
+        VotesResponse actual = voteService.getVotesByPollId(pollId);
 
-        assertThat(result).isSameAs(mockResponse);
         verify(pollService).getPollById(pollId);
         verify(voteRepository).findByPollId(pollId);
-        verify(voteMapper).toVotesResponse(pollId, existingVotes);
+        verify(voteAggregator).getVoteTotals(voteResponses);
+        assertThat(actual.getPollId()).isEqualTo(pollId);
+        assertThat(actual.getVotes()).isEqualTo(voteResponses);
+        assertThat(actual.getTotals()).isSameAs(voteTotals);
     }
+
 
     @Test
     void getVotesByPollId_shouldThrowNotFoundException_whenPollDoesNotExist() {
@@ -68,7 +80,7 @@ public class VoteServiceTest {
 
         assertThat(ex.getMessage()).isEqualTo("The poll ID '1' does not exist");
         verify(pollService).getPollById(pollId);
-        verifyNoInteractions(voteRepository, voteMapper);
+        verifyNoInteractions(voteRepository, voteMapper, voteAggregator);
     }
 
     @Test
