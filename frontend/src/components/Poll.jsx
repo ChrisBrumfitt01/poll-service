@@ -38,16 +38,16 @@ export default function Poll({ data: { id, question, options } }) {
 
           {!loading && !votes && (
             <div className="poll-options">
-            {options.map(option => (
-              <button 
-                key={option.id}
-                className="poll-option"
-                onClick={() => handleClick(option)}             
-              >
-                {option.description}
-              </button>
-            ))}
-          </div>
+              {options.map(option => (
+                <button 
+                  key={option.id}
+                  className="poll-option"
+                  onClick={() => handleClick(option)}             
+                >
+                  {option.description}
+                </button>
+              ))}
+            </div>
           )}
 
           {
@@ -58,7 +58,6 @@ export default function Poll({ data: { id, question, options } }) {
 
           {
             !loading && votes && options.map(option => (
-
               <p key={option.id} className="poll-result">
                 <span className="poll-option-description">{option.description}</span>
                 <span className="poll-option-result">{getResult(option.id)}</span>

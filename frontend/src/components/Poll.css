@@ -36,12 +36,12 @@
 .poll-result {
     display: flex;
     justify-content: space-between;
-  }
+}
   
 .poll-option-description {
-text-align: left;
+    text-align: left;
 }
 
 .poll-option-result {
-text-align: right;
+    text-align: right;
 }
