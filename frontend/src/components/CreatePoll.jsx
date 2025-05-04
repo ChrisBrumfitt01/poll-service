@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Link } from 'react-router-dom';
 import { createPoll } from '../service/httpClient.js'
 import LoadingSpinner from "./LoadingSpinner.jsx";
+import Error from './Error.jsx';
+import FormInput from './FormInput.jsx';
 import './CreatePoll.css';
 
 
@@ -45,7 +47,6 @@ export default function CreatePoll() {
             setSuccess(false);
             setError(true);
             console.error("Poll creation failed:", error);
-            alert("Failed to create poll. Try again later.");
         } finally {
             setLoading(false);
         }
@@ -65,33 +66,21 @@ export default function CreatePoll() {
                         Add Option
                     </button>
 
-                    <div className="textbox-container">
-                        <label>Question</label>
-                        <input type="text" name="question" required />
-                    </div>
+                    <FormInput label="Question" name="question" type="text" />
 
                     {options.map(name => (
-                        <div className="form-group" key={name}>
-                            <label>Option</label>
-                            <input type="text" name={name} required />
-                        </div>
+                        <FormInput key={name} label="Option" name={name} type="text" />
                     ))}
 
-                    <div className="form-group">
-                        <label>Active From</label>
-                        <input type="datetime-local" name="activeFrom" required />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Active To</label>
-                        <input type="datetime-local" name="activeTo" required />
-                    </div>              
+                    <FormInput label="Active From" name="activeFrom" type="datetime-local" />
+                    <FormInput label="Active To" name="activeTo" type="datetime-local" /> 
 
                     <button type="submit">Send</button>
                 </form>
 
                 {loading && <LoadingSpinner />}
                 {error && <Error>An error occured when trying to create your poll. The poll has not been created.</Error>}
+                {success && <p>Success! Your poll has been created</p>}
             </div>
             
         </section>
