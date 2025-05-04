@@ -2,11 +2,13 @@ import { useEffect, useState } from "react"
 import { getActivePolls, castVote, getVotes } from '../service/httpClient.js'
 import './Poll.css';
 import LoadingSpinner from "./LoadingSpinner.jsx";
+import Error from './Error.jsx';
 
 
 export default function Poll({ data: { id, question, options } }) {
     const [votes, setVotes] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
     const handleClick = async (selectedOption) => {
       try {
@@ -14,7 +16,9 @@ export default function Poll({ data: { id, question, options } }) {
         await castVote(id, selectedOption.id);
         const voteData = await getVotes(id);
         setVotes(voteData);
+        setError(false);
       } catch (err) {
+        setError(true);
         console.error(err);
       } finally {
         setLoading(false);
@@ -29,6 +33,8 @@ export default function Poll({ data: { id, question, options } }) {
     return (
         <section className="poll-container">
           <h3>{question}</h3>
+
+          {error && <Error>An error occurred: Your vote was not cast. Please try again later</Error>}
 
           {!loading && !votes && (
             <div className="poll-options">
