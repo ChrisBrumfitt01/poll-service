@@ -38,10 +38,10 @@
     justify-content: space-between;
   }
   
-  .poll-option-description {
-    text-align: left;
-  }
-  
-  .poll-option-result {
-    text-align: right;
-  }
+.poll-option-description {
+text-align: left;
+}
+
+.poll-option-result {
+text-align: right;
+}

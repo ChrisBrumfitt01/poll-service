@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getActivePolls } from '../service/httpClient.js'
+import { Link } from 'react-router-dom';
 import Poll from './Poll.jsx'
 import Error from './Error.jsx'
 import './Polls.css';
@@ -32,6 +33,9 @@ export default function Polls() {
 
     return (
         <section className="polls-container">
+            <Link to="/create" className="create-poll-link">
+                Create a New Poll
+            </Link>
             <h2>Our currently active polls:</h2>
 
             {error && <Error>An error occurred when trying to retrieve polls. Please 

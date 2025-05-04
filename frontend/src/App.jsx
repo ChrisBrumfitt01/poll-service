@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import dizplaiLogo from './assets/dizplai-logo.png'
-import './App.css'
-import Polls from './components/Polls'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout.jsx';
+import Polls from './components/Polls.jsx';
+import CreatePoll from './components/CreatePoll.jsx';
 
 function App() {
   return (
-    <div className="app-container">
-      <div className="logo-container">
-        <img src={dizplaiLogo} id="logo" alt="Dizplai logo" />
-      </div>
-      <Polls></Polls>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Polls />} />
+          <Route path="create" element={<CreatePoll />} />
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 
