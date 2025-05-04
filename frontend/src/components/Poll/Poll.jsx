@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { castVote, getVotes } from '../service/httpClient.js'
+import { castVote, getVotes } from '../../service/httpClient.js'
 import './Poll.css';
-import LoadingSpinner from "./LoadingSpinner.jsx";
-import Error from './Error.jsx';
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
+import Error from '../Error/Error.jsx';
 
 
 export default function Poll({ data: { id, question, options } }) {
