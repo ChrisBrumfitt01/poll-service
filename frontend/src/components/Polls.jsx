@@ -44,7 +44,7 @@ export default function Polls() {
             {loading && <LoadingSpinner/>}
 
             {polls.length > 0 && polls.map((poll) => (
-                <div key={poll.id} className="poll-container">
+                <div key={poll.id}className="poll-container">
                     <Poll data={poll} />
                 </div>
             ))}

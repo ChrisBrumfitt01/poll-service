@@ -46,7 +46,8 @@ export default function CreatePoll() {
         } catch (error) {
             setSuccess(false);
             setError(true);
-            console.error("Poll creation failed:", error);
+            console.log("Error");
+            console.log(error)
         } finally {
             setLoading(false);
         }
@@ -60,7 +61,7 @@ export default function CreatePoll() {
             </Link>
             <h2>Create a poll:</h2>
 
-            <div className="formContainer">
+            <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <button type="button" onClick={handleAddOption}>
                         Add Option
