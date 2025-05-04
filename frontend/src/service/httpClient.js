@@ -20,3 +20,13 @@ export const castVote = async (pollId, optionId) => {
         throw error;
     }
 };
+
+export const getVotes = async (pollId) => {
+    try {
+        const response = await axios.get(`${SERVICE_URL}/poll/${pollId}/votes`);
+        return response.data;
+    } catch (error) {
+        console.error('An error occured when getting votes:', error);
+        throw error;
+    }
+};

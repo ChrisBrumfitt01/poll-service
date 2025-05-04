@@ -1,19 +1,37 @@
 import { useEffect, useState } from "react"
-import { getActivePolls } from '../service/httpClient.js'
+import { getActivePolls, castVote, getVotes } from '../service/httpClient.js'
 import './Poll.css';
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
 
 export default function Poll({ data: { id, question, options } }) {
+    const [votes, setVotes] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const handleClick = (selectedOption) => {
-      console.log(`${selectedOption.description} was selected`);
-    }
+    const handleClick = async (selectedOption) => {
+      try {
+        setLoading(true);
+        await castVote(id, selectedOption.id);
+        const voteData = await getVotes(id);
+        setVotes(voteData);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const getResult = (optionId) => {
+        const total = votes.totals.find(t => t.optionId === optionId);
+        return total ? `${total.percentage}% (${total.count} votes)` : "0% (0 votes)";
+    };
 
     return (
         <section className="poll-container">
           <h3>{question}</h3>
 
-          <div className="poll-options">
+          {!loading && !votes && (
+            <div className="poll-options">
             {options.map(option => (
               <button 
                 key={option.id}
@@ -24,15 +42,23 @@ export default function Poll({ data: { id, question, options } }) {
               </button>
             ))}
           </div>
+          )}
 
+          {
+            loading && (
+              <LoadingSpinner/>
+            )
+          }
 
-
-
-          {/* <ul>
-            {options.map((opt) => (
-              <li key={opt.id}>{opt.description}</li>
-            ))}
-          </ul> */}
+          {
+            !loading && votes && options.map(option => (
+              <p
+                key={option.id}
+                className="poll-result">
+                  {option.description}{getResult(option.id)}
+              </p>
+            ))
+          }
         </section>
       );
 
