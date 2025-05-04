@@ -1,30 +1,76 @@
-# Poll Service
+# Dizplai Poll Application
 
-This service is the backend for the Dizplai coding challenge where I was asked to develop an application to allow users
-to vote on polls. 
+This application is my submission for the Dizplai coding challenge, as part of their recruitment process. This 
+repository contains both the frontend and backend.
+
+The backend was written using Java and Spring Boot and Maven. The frontend was written using React.
+
+## Running the application
+
+#### Running the backend
+
+To run the backend, navigate to /backend and run:
+
+``` mvn spring-boot:run ```
+
+The backend will run on http://localhost:8080
+
+To run the tests, use:
+
+```` mvn test ````
+
+
+#### Running the frontend
+
+To run the frontend, navigate to /frontend on your terminal and run:
+
+```` npm install ````
+
+followed by
+
+```` npm run dev ````
+
+It will run on http://localhost:5173
+
+The tests can be ran with the command:
+
+```` npm test ````
+
+
 
 
 ## Assumptions
  
 ### Active poll
 
-The brief mentions that a user should be shown "The most active poll" so I needed to make an assumption to implement this.
-A poll has two additional fields: `activeFrom` and `activeTo` and a poll is considered active if the current date/time
-falls in between these dates.
+The brief mentions that a user should be shown "The currently active poll" so an assumption had to be made to answer the
+question: *What is an active poll?*
+I considered using a Boolean flag for marking a poll as active/inactive, but I decided to add two additional fields:
+`activeFrom` and `activeTo`. A poll is active if the current date/time falls between these dates. This means it is
+possible for more than one poll to be active at a time, so the endpoint to get active polls returns a list.
+
+The reason I avoided the Boolean is because, if a user wants to make a poll active on a specific date, then they have to
+online on that specific date to mark it as active. I thought it was likely that Dizplai pre-plan their polls.
+
+### One answer per poll
+
+The user can only select one answer for each poll. Clicking an option will submit a vote for that option. Whilst Dizplai
+might have polls that allow multiple selections, this has not been implemented in this application.
+
 
 ### Multiple votes
 
-Under this implementation, it is possible for a user to vote on a poll multiple times, simply by refreshing the page after voting.
-This is not ideal but it is this way due to limited time. If I had longer to implement this done, this could be done
-with a login mechanism: Users would have to log in to vote, and only one vote is allowed per user. Alternatively, this 
-could be done using cookies or limiting votes by IP address.
+Under this implementation, it is possible for a user to vote on a poll multiple times, simply by refreshing the page 
+after voting and then voting again.
+This is not ideal but was implemented this way due to limited time and nature of the task. 
+If I had longer to implement this done, this could be done with a login mechanism: Users would have to log in to vote, 
+and only one vote is allowed per user. Alternatively, this could be done using cookies or limiting votes by IP address.
 
 
 
 ## Design Decisions
 
+### Database
 
-
-- In the VoteEntity, I have added a SelectedOption and a SelectedOption ID. I wanted the SelectedOption so that a foreign
-key constraint would be created. But when casting a vote, there is no need to pass through the entire Option object; an Option ID will suffice.
-- In PollEntity, for the list of options, I considered using an @ElementCollection but didn't want to use the string values to link a vote to an option. As implemented, they are linked by an OptionID.
+The backend uses a H2 in-memory database. H2 was chosen because it was fast & easy to set up and provides a database that
+supports SQL.If this was an actual production application, I would use a RDBMS such as Oracle or SQL Server.
