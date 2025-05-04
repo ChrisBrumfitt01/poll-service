@@ -30,3 +30,12 @@ export const getVotes = async (pollId) => {
         throw error;
     }
 };
+
+export const createPoll = async (payload) => {
+    try {
+        await axios.post(`${SERVICE_URL}/poll`, payload);
+    } catch (error) {
+        console.error('An error occurred when creating a poll:', error);
+        throw error;
+    }
+};

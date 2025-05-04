@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { getActivePolls, castVote, getVotes } from '../service/httpClient.js'
+import { useState } from "react"
+import { castVote, getVotes } from '../service/httpClient.js'
 import './Poll.css';
 import LoadingSpinner from "./LoadingSpinner.jsx";
 import Error from './Error.jsx';
@@ -58,6 +58,7 @@ export default function Poll({ data: { id, question, options } }) {
 
           {
             !loading && votes && options.map(option => (
+
               <p key={option.id} className="poll-result">
                 <span className="poll-option-description">{option.description}</span>
                 <span className="poll-option-result">{getResult(option.id)}</span>

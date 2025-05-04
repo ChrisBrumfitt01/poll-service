@@ -1,0 +1,10 @@
+.create-poll-container {
+    width: 80%;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    padding: 2em;
+}
+
+.textbox-container {
+    display: block;
+}
