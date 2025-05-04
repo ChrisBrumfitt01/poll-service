@@ -23,7 +23,8 @@ To run the backend, navigate to /backend and run:
 
 The backend will run on http://localhost:8080
 
-To run the tests, use:
+To run the tests, use this command. This will run unit tests against the services, a DataJPA test against the 
+PollRepository and an integration test class against the PollController.
 
 ```` mvn test ````
 
@@ -38,9 +39,9 @@ followed by
 
 ```` npm run dev ````
 
-It will run on http://localhost:5173
+The frontend will run on http://localhost:5173
 
-The tests can be ran with the command:
+The tests can be ran with this command. Only the poll component is tested as a sample of how I would write the tests.
 
 ```` npm test ````
 
@@ -64,12 +65,13 @@ Password:
 
 The brief mentions that a user should be shown "The currently active poll" so an assumption had to be made to answer the
 question: *What is an active poll?*
-I considered using a Boolean flag for marking a poll as active/inactive, but I decided to add two additional fields:
-`activeFrom` and `activeTo`. A poll is active if the current date/time falls between these dates. This means it is
-possible for more than one poll to be active at a time, so the endpoint to get active polls returns a list.
+I considered using a Boolean flag for marking a poll as active/inactive, but I decided to add two date/time fields instead:
+`activeFrom` and `activeTo`. A poll is active if the current date/time falls between these two dates. This means it is
+possible for more than one poll to be active at a time, therefore the endpoint to get active polls returns a list.
 
-The reason I avoided the Boolean is because, if a user wants to make a poll active on a specific date, then they have to
-online on that specific date to mark it as active. I thought it was likely that Dizplai pre-plan their polls.
+The reason I avoided the Boolean is because, if a user wants to make a poll active on a specific date/time, then they have to
+be online on that specific date/time to mark it as active. I thought it was likely that Dizplai pre-plan their polls (e.g.
+to run at half time during football matches) so this gives the ability to schedule when a poll will be active.
 
 ### One answer per poll
 
