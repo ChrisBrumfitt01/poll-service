@@ -7,7 +7,15 @@ The backend was written using Java and Spring Boot and Maven. The frontend was w
 
 ## Running the application
 
-#### Running the backend
+### Prerequisites
+
+You will need the following installed on your laptop to run the frontend and backend applications:
+
+- Java 21
+- Maven 
+- NodeJS
+
+### Running the backend
 
 To run the backend, navigate to /backend and run:
 
@@ -20,7 +28,7 @@ To run the tests, use:
 ```` mvn test ````
 
 
-#### Running the frontend
+### Running the frontend
 
 To run the frontend, navigate to /frontend on your terminal and run:
 
@@ -36,7 +44,18 @@ The tests can be ran with the command:
 
 ```` npm test ````
 
+### H2 Database console
 
+When the backend is running, you can access the H2 console and interact directly with the database at
+http://localhost:8080/h2-console
+
+Use the following details to connect (leave the password empty as this is not set):
+````
+DriverClass: org.h2.Driver
+JDBC URL: jdbc:h2:mem:polldb
+Username: sa
+Password:
+````
 
 
 ## Assumptions
@@ -54,8 +73,9 @@ online on that specific date to mark it as active. I thought it was likely that 
 
 ### One answer per poll
 
-The user can only select one answer for each poll. Clicking an option will submit a vote for that option. Whilst Dizplai
-might have polls that allow multiple selections, this has not been implemented in this application.
+The user can only select one answer for each poll. Clicking an option will submit a vote for that option. Whilst it may
+be a future requirement to have polls that allow multiple selections, this has not been implemented and is not 
+possible in this application.
 
 
 ### Multiple votes
@@ -63,8 +83,9 @@ might have polls that allow multiple selections, this has not been implemented i
 Under this implementation, it is possible for a user to vote on a poll multiple times, simply by refreshing the page 
 after voting and then voting again.
 This is not ideal but was implemented this way due to limited time and nature of the task. 
-If I had longer to implement this done, this could be done with a login mechanism: Users would have to log in to vote, 
-and only one vote is allowed per user. Alternatively, this could be done using cookies or limiting votes by IP address.
+If I had longer to implement this, this could be done with a login mechanism: Users would have to log in to vote, 
+and only one vote is allowed per user. Alternatively, this could be done using cookies or limiting votes by IP address if
+we wanted to allow non-registered users to vote but this is less secure and users can find work-arounds around this.
 
 
 
@@ -72,5 +93,5 @@ and only one vote is allowed per user. Alternatively, this could be done using c
 
 ### Database
 
-The backend uses a H2 in-memory database. H2 was chosen because it was fast & easy to set up and provides a database that
+The backend uses an H2 in-memory database. H2 was chosen because it was fast & easy to set up and provides a database that
 supports SQL.If this was an actual production application, I would use a RDBMS such as Oracle or SQL Server.
