@@ -3,7 +3,7 @@
 This application is my submission for the Dizplai coding challenge, as part of their recruitment process. This 
 repository contains both the frontend and backend.
 
-The backend was written using Java and Spring Boot and Maven. The frontend was written using React.
+The backend was written using Java 21, Spring Boot and Maven. The frontend was written using React, NodeJS and Vite.
 
 ## Running the application
 
