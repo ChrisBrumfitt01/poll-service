@@ -1,0 +1,8 @@
+.error-message {
+    color: white;
+    padding: 0.5em;
+}
+
+.error-container {
+    background-color: red;
+}
