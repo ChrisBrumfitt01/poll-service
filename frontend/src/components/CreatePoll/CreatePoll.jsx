@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPoll } from '../../service/httpClient.js'
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import Error from '../Error/Error.jsx';
+import SuccessMessage from '../SuccessMessage/SuccessMessage.jsx';
 import FormInput from '../FormInput/FormInput.jsx';
 import './CreatePoll.css';
 
@@ -81,7 +82,7 @@ export default function CreatePoll() {
 
                 {loading && <LoadingSpinner />}
                 {error && <Error>An error occured when trying to create your poll. The poll has not been created.</Error>}
-                {success && <p>Success! Your poll has been created</p>}
+                {success && <SuccessMessage>Success! Your poll has been created</SuccessMessage>}
             </div>
             
         </section>

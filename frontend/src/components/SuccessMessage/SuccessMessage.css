@@ -1,0 +1,8 @@
+.success-message {
+    color: white;
+    padding: 0.5em;
+}
+
+.success-message-container {
+    background-color: darkgreen;
+}
