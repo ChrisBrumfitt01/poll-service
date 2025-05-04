@@ -58,10 +58,9 @@ export default function Poll({ data: { id, question, options } }) {
 
           {
             !loading && votes && options.map(option => (
-              <p
-                key={option.id}
-                className="poll-result">
-                  {option.description}{getResult(option.id)}
+              <p key={option.id} className="poll-result">
+                <span className="poll-option-description">{option.description}</span>
+                <span className="poll-option-result">{getResult(option.id)}</span>
               </p>
             ))
           }
