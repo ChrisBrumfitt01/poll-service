@@ -3,7 +3,7 @@ import './LoadingSpinner.css';
 
 export default function LoadingSpinner() {
     return (
-        <div className="loading-spinner-container">
+        <div id="loading-spinner" className="loading-spinner-container">
             <RotatingLines
                 className="spinner"
                 strokeColor="grey"
