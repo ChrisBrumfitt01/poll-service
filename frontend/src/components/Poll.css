@@ -32,3 +32,16 @@
 .poll-option:hover {
     background-color: #1976d2;
 }
+
+.poll-result {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .poll-option-description {
+    text-align: left;
+  }
+  
+  .poll-option-result {
+    text-align: right;
+  }
