@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { Link } from 'react-router-dom';
-import { createPoll } from '../service/httpClient.js'
-import LoadingSpinner from "./LoadingSpinner.jsx";
-import Error from './Error.jsx';
-import FormInput from './FormInput.jsx';
+import { createPoll } from '../../service/httpClient.js'
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
+import Error from '../Error/Error.jsx';
+import FormInput from '../FormInput/FormInput.jsx';
 import './CreatePoll.css';
 
 

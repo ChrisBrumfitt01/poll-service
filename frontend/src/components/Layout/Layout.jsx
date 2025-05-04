@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import dizplaiLogo from '../assets/dizplai-logo.png';
+import dizplaiLogo from '../../assets/dizplai-logo.png';
 import './Layout.css'; // reuse or split from App.css if needed
 
 export default function Layout() {

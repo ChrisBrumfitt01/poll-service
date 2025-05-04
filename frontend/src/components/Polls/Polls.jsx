@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { getActivePolls } from '../service/httpClient.js'
+import { getActivePolls } from '../../service/httpClient.js'
 import { Link } from 'react-router-dom';
-import Poll from './Poll.jsx'
-import Error from './Error.jsx'
+import Poll from '../Poll/Poll.jsx'
+import Error from '../Error/Error.jsx'
 import './Polls.css';
-import LoadingSpinner from "./LoadingSpinner.jsx";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 
 
