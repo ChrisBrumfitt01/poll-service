@@ -9,7 +9,7 @@ The backend was written using Java 21, Spring Boot and Maven. The frontend was w
 
 ### Prerequisites
 
-You will need the following installed on your laptop to run the frontend and backend applications:
+You will need the following installed to run the frontend and backend applications:
 
 - Java 21
 - Maven 
@@ -17,13 +17,13 @@ You will need the following installed on your laptop to run the frontend and bac
 
 ### Running the backend
 
-To run the backend, navigate to /backend and run:
+To run the backend, navigate to /backend on a terminal and run:
 
 ``` mvn spring-boot:run ```
 
 The backend will run on http://localhost:8080
 
-To run the tests, use this command. This will run unit tests against the services, a DataJPA test against the 
+To run the tests, use this command. This will run unit tests against the services, a DataJPA test class against the 
 PollRepository and an integration test class against the PollController.
 
 ```` mvn test ````
