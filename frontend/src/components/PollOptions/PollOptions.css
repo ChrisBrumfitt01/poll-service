@@ -1,0 +1,17 @@
+.poll-options {
+    margin: 0;
+    padding: 0;
+}
+
+.poll-option {
+    display: block;
+    width: 100%;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 5px;              
+    padding: 10px;
+    margin: 5px 0;
+    text-align: center;
+    cursor: pointer;                 
+}

@@ -11,41 +11,6 @@
     margin-bottom: 10px;
 }
 
-.poll-options {
-    margin: 0;
-    padding: 0;
-}
-
-.poll-option {
-    display: block;
-    width: 100%;
-    background-color: #2196f3;
-    color: white;
-    border: none;
-    border-radius: 5px;              
-    padding: 10px;
-    margin: 5px 0;
-    text-align: center;
-    cursor: pointer;                 
-}
-
 .poll-option:hover {
     background-color: #1976d2;
-}
-
-.poll-result {
-    display: flex;
-    justify-content: space-between;
-}
-  
-.poll-result-description {
-    width: 80%;
-    text-align: left;
-    padding: 0.2em;
-    border: 1px solid #2196f3;
-    text-align: center;
-}
-
-.poll-result-result {
-    text-align: right;
 }
