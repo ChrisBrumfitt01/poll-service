@@ -3,6 +3,8 @@ import { castVote, getVotes } from '../../service/httpClient.js'
 import './Poll.css';
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import Error from '../Error/Error.jsx';
+import PollOptions from "../PollOptions/PollOptions.jsx";
+import PollResults from "../PollResults/PollResults.jsx";
 
 
 export default function Poll({ data: { id, question, options } }) {
@@ -40,39 +42,11 @@ export default function Poll({ data: { id, question, options } }) {
 
           {error && <Error>An error occurred: Your vote was not cast. Please try again later</Error>}
 
-          {!loading && !votes && (
-            <div className="poll-options">
-              {options.map(option => (
-                <button 
-                  key={option.id}
-                  className="poll-option"
-                  onClick={() => handleClick(option)}             
-                >
-                  {option.description}
-                </button>
-              ))}
-            </div>
-          )}
+          {!loading && !votes && <PollOptions options={options} handleClick={handleClick} />}
 
-          {
-            loading && (
-              <LoadingSpinner/>
-            )
-          }
+          {loading && <LoadingSpinner/>}
 
-          {
-            !loading && votes && options.map(option => (
-              <p key={option.id} className="poll-result">
-                <span 
-                  className="poll-result-description"
-                  style={{background: `linear-gradient(to right, #2196f3 ${getResult(option.id).percentage}%, transparent ${getResult(option.id).percentage}%)`}}
-                >
-                  {option.description}
-                </span>
-                <span className="poll-result-votes">{getResult(option.id).text}</span>
-              </p>
-            ))
-          }
+          {!loading && votes && <PollResults options={options} votes={votes} />}
         </section>
       );
 
