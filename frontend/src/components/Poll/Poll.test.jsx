@@ -35,10 +35,10 @@ describe('Poll component', () => {
 
     it('Renders results after casting a vote', async () => {
         const mockVoteResult = {
-        totals: [
-            { optionId: 888, percentage: 80, count: 8 },
-            { optionId: 999, percentage: 20, count: 2 },
-        ]
+            totals: [
+                { optionId: 888, percentage: 80, count: 8 },
+                { optionId: 999, percentage: 20, count: 2 },
+            ]
         };
 
         vi.spyOn(httpClient, 'castVote').mockResolvedValueOnce();
@@ -49,8 +49,8 @@ describe('Poll component', () => {
 
         expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
         await waitFor(() => {
-        expect(screen.getByText('80% (8 votes)')).toBeInTheDocument();
-        expect(screen.getByText('20% (2 votes)')).toBeInTheDocument();
+            expect(screen.getByText('80% (8 votes)')).toBeInTheDocument();
+            expect(screen.getByText('20% (2 votes)')).toBeInTheDocument();
         });
 
         expect(httpClient.castVote).toHaveBeenCalledWith(123, 888);

@@ -21,6 +21,12 @@ export default function CreatePoll() {
         }
     };
 
+    const handleRemoveOption = () => {
+        if (options.length > 2) {
+            setOptions(options.slice(0, -1));
+        }
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -64,20 +70,27 @@ export default function CreatePoll() {
 
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
-                    <button type="button" onClick={handleAddOption}>
-                        Add Option
-                    </button>
+                    <div className="button-container">
+                        <button type="button" onClick={handleAddOption}>
+                            Add Option
+                        </button>
+                        <button type="button" onClick={handleRemoveOption}>
+                            Remove Option
+                        </button>
+                    </div>
+                
+                    <div className="input-container">
+                        <FormInput label="Question" name="question" type="text" />
 
-                    <FormInput label="Question" name="question" type="text" />
+                        {options.map(name => (
+                            <FormInput key={name} label="Option" name={name} type="text" />
+                        ))}
 
-                    {options.map(name => (
-                        <FormInput key={name} label="Option" name={name} type="text" />
-                    ))}
-
-                    <FormInput label="Active From" name="activeFrom" type="datetime-local" />
-                    <FormInput label="Active To" name="activeTo" type="datetime-local" /> 
-
-                    <button type="submit">Send</button>
+                        <FormInput label="Active From" name="activeFrom" type="datetime-local" />
+                        <FormInput label="Active To" name="activeTo" type="datetime-local" /> 
+                    </div>
+                    
+                    <button type="submit">Submit</button>
                 </form>
 
                 {loading && <LoadingSpinner />}
