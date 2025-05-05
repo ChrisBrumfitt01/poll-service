@@ -18,14 +18,22 @@
 }
 
 button {
-    display: block;
     width: 20%;
     background-color: #2196f3;
     color: white;
     border: none;
     border-radius: 5px;              
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px 5px;
     text-align: center;
     cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.input-container {
+    margin: 1em 0 1em;
 }
