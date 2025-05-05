@@ -27,7 +27,11 @@ export default function Poll({ data: { id, question, options } }) {
 
     const getResult = (optionId) => {
         const total = votes.totals.find(t => t.optionId === optionId);
-        return total ? `${total.percentage}% (${total.count} votes)` : "0% (0 votes)";
+        return {
+          percentage: total ? total.percentage : 0,
+          votes: total ? total.votes : 0,
+          text: total ? `${total.percentage}% (${total.count} votes)` : "0% (0 votes)"
+        };
     };
 
     return (
@@ -59,8 +63,13 @@ export default function Poll({ data: { id, question, options } }) {
           {
             !loading && votes && options.map(option => (
               <p key={option.id} className="poll-result">
-                <span className="poll-option-description">{option.description}</span>
-                <span className="poll-option-result">{getResult(option.id)}</span>
+                <span 
+                  className="poll-result-description"
+                  style={{background: `linear-gradient(to right, #2196f3 ${getResult(option.id).percentage}%, transparent ${getResult(option.id).percentage}%)`}}
+                >
+                  {option.description}
+                </span>
+                <span className="poll-result-votes">{getResult(option.id).text}</span>
               </p>
             ))
           }
